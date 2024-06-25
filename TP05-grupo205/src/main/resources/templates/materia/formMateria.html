@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Formulario Materia</title>
+</head>
+<body>
+
+<header>
+<div data-th-replace="~{layouts/header::navbar}"></div>
+</header>
+
+<div class="container">
+	<h1>Formulario Materia</h1>
+	<form data-th-object="${nuevaMateria}" data-th-action="@{/guardarMateria}" method="post">
+	  <div class="col-md-4">
+	    <label for="codigo" class="form-label">Codigo</label>
+	    <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" required>
+	  </div>
+	  <div class="col-md-4">
+	    <label for="nombre" class="form-label">Nombre de la materia</label>
+	    <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+	  </div>
+	  <div class="col-md-4">
+	    <label for="curso" class="form-label">Curso</label>
+	    <input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
+	  </div>
+	  <div class="col-md-4">
+	    <label for="cantidad" class="form-label">Cantidad de horas</label>
+	    <input type="number" class="form-control" id="cantidad" data-th-field="*{cantidadHoras}" required>
+	  </div>
+	  <div class="col-md-4">
+	    <label for="modalidad" class="form-label">modalidad</label>
+	    <input type="text" class="form-control" id="modalidad" data-th-field="*{modalidad}" required>
+	  </div>
+	  <br>
+	  <button type="submit" class="btn btn-primary">Guardar Carrera</button>
+	</form>
+</div>
+
+<footer>
+<div data-th-replace="~{layouts/footer::footer}"></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
