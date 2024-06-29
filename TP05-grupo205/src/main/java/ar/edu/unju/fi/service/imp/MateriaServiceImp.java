@@ -30,7 +30,7 @@ public class MateriaServiceImp implements MateriaService{
 	@Override
 	public List<Materia> mostrarMaterias() {
 		// TODO Auto-generated method stub
-		return materiaRepository.findAll();
+		return materiaRepository.findMateriaByEstado(true);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class MateriaServiceImp implements MateriaService{
 		if(	materiaExistente != null){
 			materiaExistente.setCodigo(materia.getCodigo());
 			materiaExistente.setCurso(materia.getCurso());
-			materiaExistente.setEstado(true);
+			materiaExistente.setEstado(materia.getEstado());
 			materiaExistente.setModalidad(materia.getModalidad());
 			materiaExistente.setCantidadHoras(materia.getCantidadHoras());
 			materiaExistente.setNombre(materia.getNombre());
@@ -85,5 +85,11 @@ public class MateriaServiceImp implements MateriaService{
 				materiaRepository.save(materiaMapDTO.toEntity(materia));
 			}
 		}
+	}
+
+	@Override
+	public List<Materia> mostrarMateriasInactivas() {
+		// TODO Auto-generated method stub
+		return materiaRepository.findMateriaByEstado(false);
 	}
 }

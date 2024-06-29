@@ -23,4 +23,5 @@ public class AlumnoDTO {
     private String telefono;
     private Date fechaNacimiento;
     private String domicilio;
+    private Boolean estado;
 }

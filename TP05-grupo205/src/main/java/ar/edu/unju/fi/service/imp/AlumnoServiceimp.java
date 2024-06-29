@@ -28,7 +28,7 @@ public class AlumnoServiceimp implements AlumnoService{
 	@Override
 	public List<Alumno> mostrarAlumno() {
 		// TODO Auto-generated method stub
-		return alumnoRepository.findAll();
+		return alumnoRepository.findAlumnoByEstado(true);
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class AlumnoServiceimp implements AlumnoService{
 		for (int i = 0 ; i < todosLosAlumnos.size();i++) {
 			Alumno alumno = todosLosAlumnos.get(i);
 			if(alumno.getLU().equals(codigo)) {
-				alumnoRepository.delete(alumno);
+				alumno.setEstado(false);
+				alumnoRepository.save(alumno);
 			}
 		}
 	}
@@ -73,6 +74,24 @@ public class AlumnoServiceimp implements AlumnoService{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void DardeAlta(String codigo) {
+		List<Alumno> todosLosAlumnos = alumnoRepository.findAll();
+		for (int i = 0 ; i < todosLosAlumnos.size();i++) {
+			Alumno alumno = todosLosAlumnos.get(i);
+			if(alumno.getLU().equals(codigo)) {
+				alumno.setEstado(true);
+				alumnoRepository.save(alumno);
+			}
+		}
+	}
+
+	@Override
+	public List<Alumno> mostrarAlumnoInactivos() {
+		// TODO Auto-generated method stub
+		return alumnoRepository.findAlumnoByEstado(false);
 	}
 	
 

@@ -21,10 +21,10 @@
 <br>
 <br>
 <div class="container">
-  <h1>Listado de las Materias activas</h1>
+  <h1>Listado de las Materias inactivas</h1>
   <br>
   <a data-th-href="@{/formularioMateria}" class="btn btn-primary">Agregar Materia</a>
-  <a data-th-href="@{/listadoMateriaInactiva}" class="btn btn-primary">Lista De Materias Inactivas</a>
+  <a data-th-href="@{/listadoMateria}" class="btn btn-primary">Listado de materia activas</a>
   <br>
   <div class="table-responsive">
     <table class="table">
@@ -47,6 +47,7 @@
           <td data-th-text="${materia.modalidad}"></td>
           <td>
           	<a data-th-href="@{'/borrarMateria/'+${materia.codigo}}" class="btn btn-danger">Borrar</a>
+          	<a data-th-href="@{'/darDeAltaMateria/'+${materia.codigo}}" class="btn btn-success">Dar de Alta</a>
           	<a data-th-href="@{'/modificarMateria/'+${materia.codigo}}" class="btn btn-warning">Edicion</a>
           </td>
         </tr>

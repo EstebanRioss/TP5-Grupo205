@@ -9,6 +9,7 @@ import ar.edu.unju.fi.model.Materia;
 public interface MateriaService {
 	public void guardarMateria(MateriaDTO materiaParaGuardar);
 	public List<Materia> mostrarMaterias();
+	public List<Materia> mostrarMateriasInactivas();
 	public void borrarMateria (String codigo);
 	public void darDeAlta (String codigo);
 	public void modificarMateria (MateriaDTO materia);

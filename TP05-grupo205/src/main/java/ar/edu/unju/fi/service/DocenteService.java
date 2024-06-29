@@ -10,7 +10,8 @@ import ar.edu.unju.fi.DTO.DocenteDTO;
 public interface DocenteService {
 	
 
-	public List<DocenteDTO> MostrarDocente(); 
+	public List<DocenteDTO> MostrarDocente();
+	public List<DocenteDTO> MostrarDocenteInactivos();
 	public void save(DocenteDTO docenteDTO);
 	public void deleteByLegajo(String legajo);
 	public void darDeAlta(String legajo);

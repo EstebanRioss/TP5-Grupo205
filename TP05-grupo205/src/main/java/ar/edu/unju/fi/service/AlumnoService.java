@@ -12,7 +12,9 @@ public interface AlumnoService {
 	
 	public void guardarAlumno(AlumnoDTO alumnoDTO);
 	public List<Alumno> mostrarAlumno();
+	public List<Alumno> mostrarAlumnoInactivos();
 	public void borrarAlumno(String codigo);
+	public void DardeAlta(String codigo);
 	public void modificarAlumno(AlumnoDTO alumnoDTO);
 	public AlumnoDTO buscarAlumno(String codigo);
 }

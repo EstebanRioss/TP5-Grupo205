@@ -24,7 +24,7 @@
   <h1>Listado de los Docentes activos</h1>
   <br>
   <a data-th-href="@{/formularioDocente}" class="btn btn-primary">Agregar Docente</a>
-  <a data-th-href="@{/listadoDocenteInactivos}" class="btn btn-primary">Lista de docentes inactivos</a>
+  <a data-th-href="@{/listadoDocente}" class="btn btn-primary">Lista de docentes activos</a>
   <br>
   <div class="table-responsive">
     <table class="table">
@@ -47,6 +47,7 @@
           <td data-th-text="${docente.telefonoDTO}"></td>
           <td>
           	<a data-th-href="@{'/borrarDocente/'+${docente.legajoDTO}}" class="btn btn-danger">Borrar</a>
+          	<a data-th-href="@{'/darDeAlta/'+${docente.legajoDTO}}" class="btn btn-success">Dar de alta</a>
           	<a data-th-href="@{'/modificarDocente/'+${docente.legajoDTO}}" class="btn btn-warning">Edicion</a>
           </td>
         </tr>
@@ -54,10 +55,3 @@
     </table>
   </div>
 </div>
-
-<footer class="fixed-bottom">
-<div data-th-replace="~{layouts/footer::footer}"></div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

@@ -12,6 +12,7 @@ public interface CarreraService {
 
 		public void guardarCarrera(CarreraDTO carreraDTO);
 		public List<Carrera> MostrarCarrera();
+		public List<Carrera> MostrarCarreraInactivas();
 		public void borrarCarrera(String codigo);
 		public void darDeAltaCarrera(String codigo);
 		public void modificarCarrera(CarreraDTO carreraDTO);

@@ -21,10 +21,10 @@
 <br>
 <br>
 	<div class="container" >
-	  <h1>Listado de los alumnos activos</h1>
+	  <h1>Listado de los alumnos inactivos</h1>
 	  <br>
 	  <a data-th-href="@{/formularioAlumno}" class="btn btn-primary">Agregar Alumno</a>
-	  <a data-th-href="@{/listadoAlumnoInactivo}" class="btn btn-primary">Ver los alumnos inactivos</a>
+	  <a data-th-href="@{/listadoAlumno}" class="btn btn-primary">Ver los alumnos activos</a>
 	  <br>
 	  <div class="table-responsive">
 	    <table class="table">
@@ -52,6 +52,7 @@
 	          <td data-th-text="${alumno.LU}"></td>
 	          <td>
 	          	<a data-th-href="@{'/borrarAlumno/'+${alumno.LU}}" class="btn btn-danger">Borrar</a>
+	          	<a data-th-href="@{'/DardeAltaAlumno/'+${alumno.LU}}" class="btn btn-success">Dar de alta</a>
 	          	<a data-th-href="@{'/modificarAlumno/'+${alumno.LU}}" class="btn btn-warning">Edicion</a>
 	          </td>
 	        </tr>

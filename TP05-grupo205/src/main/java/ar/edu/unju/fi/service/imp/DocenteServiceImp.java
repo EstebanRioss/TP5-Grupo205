@@ -24,7 +24,7 @@ public class DocenteServiceImp implements DocenteService {
 	@Override
 	public List<DocenteDTO> MostrarDocente() {
 		
-		return docenteMapDTO.toDocenteDTOList(docenteRepository.findAll());
+		return docenteMapDTO.toDocenteDTOList(docenteRepository.findDocenteByEstado(true));
 	
 	}
 
@@ -56,7 +56,7 @@ public class DocenteServiceImp implements DocenteService {
 			if(	docenteExistente != null){
 				docenteExistente.setApellidoDTO(docenteDTO.getApellidoDTO());
 				docenteExistente.setEmailDTO(docenteDTO.getEmailDTO());
-				docenteExistente.setEstadoDTO(true);
+				docenteExistente.setEstadoDTO(docenteDTO.getEstadoDTO());
 				docenteExistente.setLegajoDTO(docenteDTO.getLegajoDTO());
 				docenteExistente.setNombreDTO(docenteDTO.getNombreDTO());
 				docenteExistente.setTelefonoDTO(docenteDTO.getTelefonoDTO());
@@ -90,6 +90,12 @@ public class DocenteServiceImp implements DocenteService {
 		        break;
 		      }
 		    }
+	}
+
+	@Override
+	public List<DocenteDTO> MostrarDocenteInactivos() {
+		// TODO Auto-generated method stub
+		return docenteMapDTO.toDocenteDTOList(docenteRepository.findDocenteByEstado(false));
 	}
 
 

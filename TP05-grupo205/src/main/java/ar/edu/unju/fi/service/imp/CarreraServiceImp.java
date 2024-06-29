@@ -30,7 +30,7 @@ public class CarreraServiceImp implements CarreraService {
 	@Override
 	public List<Carrera> MostrarCarrera() {
 		// TODO Auto-generated method stub
-		return carreraRepository.findAll();
+		return carreraRepository.findCarreraByEstado(true);
 	}
 
 	@Override
@@ -78,5 +78,11 @@ public class CarreraServiceImp implements CarreraService {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public List<Carrera> MostrarCarreraInactivas() {
+		// TODO Auto-generated method stub
+		return carreraRepository.findCarreraByEstado(false);
 	}
 }

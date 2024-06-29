@@ -26,9 +26,24 @@ public class DocenteController {
 	public ModelAndView getFormDocente() {
 		ModelAndView modelView = new ModelAndView("docente/formDocente");
 		modelView.addObject("nuevoDocente",nuevoDocenteDTO);
+		modelView.addObject("band",false);
 		
 		return modelView;
 	}
+	
+	@GetMapping("/listadoDocente")
+    public ModelAndView getListadoAlumno() {
+    	ModelAndView modelView = new ModelAndView("docente/listadoDeDocentes");
+    	modelView.addObject("listadoDocentes",docenteService.MostrarDocente());
+    	return modelView;
+    }
+	
+	@GetMapping("/listadoDocenteInactivos")
+    public ModelAndView getListadoAlumnoInactivos() {
+    	ModelAndView modelView = new ModelAndView("docente/listaDeDocentesInactivos");
+    	modelView.addObject("listadoDocentes",docenteService.MostrarDocenteInactivos());
+    	return modelView;
+    }
 	
 	@PostMapping("/guardarDocente")
 	public ModelAndView saveDocente(@ModelAttribute ("nuevoDocente") DocenteDTO DocenteDTO) {
@@ -51,14 +66,14 @@ public class DocenteController {
 	
 	@GetMapping("/modificarDocente/{legajo}")
 	public ModelAndView mostrarFormularioModificarAlumno(@PathVariable(name="legajo") String legajo){
-		ModelAndView modelView = new ModelAndView("docente/modificacionDocente");
-		modelView.addObject("Docente", docenteService.buscaDocente(legajo));
-
+		ModelAndView modelView = new ModelAndView("docente/formDocente");
+		modelView.addObject("nuevoDocente", docenteService.buscaDocente(legajo));
+		modelView.addObject("band",true);
 		return modelView;
 	}
 	
-	@PostMapping("/guardarModificacionDocente")
-	public ModelAndView guardarModificacionAlumno(@ModelAttribute ("Docente")DocenteDTO Docente) {
+	@PostMapping("/guardarModDocente")
+	public ModelAndView guardarModificacionAlumno(@ModelAttribute ("nuevoDocente")DocenteDTO Docente) {
 		
 		docenteService.edit(Docente);
 		ModelAndView modelView = new ModelAndView("docente/listadoDeDocentes");

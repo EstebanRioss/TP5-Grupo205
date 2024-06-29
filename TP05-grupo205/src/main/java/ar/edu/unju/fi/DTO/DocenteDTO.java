@@ -2,10 +2,12 @@ package ar.edu.unju.fi.DTO;
 
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Component
 public class DocenteDTO {
@@ -14,5 +16,5 @@ public class DocenteDTO {
 	private String apellidoDTO;
 	private String emailDTO;
 	private String telefonoDTO;
-	private boolean estadoDTO;
+	private Boolean estadoDTO;
 }
