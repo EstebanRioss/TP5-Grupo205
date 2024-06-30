@@ -13,18 +13,19 @@ import ar.edu.unju.fi.model.Alumno;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AlumnoMapDTO {
     
-    @Mapping(source="estado", target="estado")
+    @Mapping(target = "codigoMateria", ignore = true)
+	@Mapping(source="estado", target="estado")
 	@Mapping(source="nombre", target="nombre")
     @Mapping(source="dni", target="dni")
     @Mapping(source="apellido",target = "apellido")
-	@Mapping(source="domicilio",target = "domicilio")
-    @Mapping(source= "fechaNacimiento",target="fechaNacimiento")
-	@Mapping(source="email",target = "email")
 	@Mapping(source="LU",target = "LU")
-	@Mapping(source="telefono",target = "telefono")
     AlumnoDTO convertirAlumnoAAlumnoDTO(Alumno a);
     
     
+	@Mapping(target = "domicilio", ignore = true)
+	@Mapping(target = "email", ignore = true)
+	@Mapping(target = "fechaNacimiento", ignore = true)
+	@Mapping(target = "telefono", ignore = true)
 	@InheritInverseConfiguration
     Alumno convertirAlumnoDTOAAlumno(AlumnoDTO adto);
     

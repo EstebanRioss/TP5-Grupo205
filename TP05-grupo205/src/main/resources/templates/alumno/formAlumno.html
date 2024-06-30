@@ -18,26 +18,33 @@
 <br>
 <br>
 <br>
-
+	
 	<div class="container" data-bs-theme="dark" >
 		<h1>Formulario Alumno</h1>
 		<form data-th-object="${nuevoAlumno}" data-th-action="${band}?@{/GuardarModAlumno}:@{/guardarAlumno}" method="post">
 		  <div class="col-md-4">
 		    <label for="dni" class="form-label">Dni</label>
 		    <input type="number" class="form-control" id="dni" data-th-field="*{dni}" data-th-readonly="${band}" >
+		    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('dni')}" data-th-error="*{dni}"></p>
 		  </div>
+		  
 		  <div class="col-md-4">
 		    <label for="nombre" class="form-label">Nombre</label>
 		    <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+		    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-error="*{nombre}"></p>
 		  </div>
+		  
 		  <div class="col-md-4">
 		    <label for="apellido" class="form-label">Apellido</label>
 		    <input type="text" class="form-control" id="apellido" data-th-field="*{apellido}" required>
+		    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('apellido')}" data-th-error="*{apellido}"></p>
 		  </div>
+		   <!-- 
 		  <div class="col-md-4">
 		    <label for="email" class="form-label">Email</label>
 		    <input type="email" class="form-control" id="email" data-th-field="*{email}" required>
 		  </div>
+		  
 		  <div class="col-md-4">
 		    <label for="telefono" class="form-label">Telefono</label>
 		    <input type="number" class="form-control" id="telefono" data-th-field="*{telefono}" required>
@@ -50,16 +57,26 @@
 		    <label for="domicilio" class="form-label">Domicilio</label>
 		    <input type="text" class="form-control" id="domicilio" data-th-field="*{domicilio}" required>
 		  </div>
+		  -->
 		  <div class="col-md-4">
 		    <label for="libretaUniversitaria" class="form-label">Libreta Universitaria</label>
 		    <input type="text" class="form-control" id="libretaUniversitaria" data-th-field="*{LU}" data-th-readonly="${band}" >
 		  </div>
+		  
 		  <div class="col-md-4">
 		    <label for="estado" class="form-label">Estado</label>
 		    <select class="form-select" id="estado" name="estado" data-th-field="*{estado}">
 			  <option value="" selected>Estado</option>
 			  <option value="true" data-th-selected="${estado == true}">Activo</option>
 			  <option value="false" data-th-selected="${estado == false}">Inactivo</option>
+			</select>
+	  	  </div>
+	  	   
+	  	  <div class="col-md-4">
+		    <label for="listaMaterias" class="form-label">Materias</label>
+		    <select class="form-select" id="listaMaterias" name="listaMaterias" data-th-each="materia : ${listadoMaterias}">
+			  <option value="" disabled>Seleccione una materia o mas materias</option>
+			  <option data-th-value="${materia.nombre}" data-th-text="${materia.nombre}" data-th-selected="${materias.contains(materia.nombre)}"></option>
 			</select>
 	  	  </div>
 		  <br>

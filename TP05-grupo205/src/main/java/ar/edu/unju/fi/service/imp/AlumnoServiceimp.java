@@ -52,11 +52,7 @@ public class AlumnoServiceimp implements AlumnoService{
 		if(	alumnoExistente != null){
 			alumnoExistente.setNombre(alumnoMod.getNombre());
 	        alumnoExistente.setApellido(alumnoMod.getApellido());
-	        alumnoExistente.setDni(alumnoMod.getDni());
-	        alumnoExistente.setDomicilio(alumnoMod.getDomicilio());
-	        alumnoExistente.setEmail(alumnoMod.getEmail());
-	        alumnoExistente.setFechaNacimiento(alumnoMod.getFechaNacimiento());
-	        alumnoExistente.setTelefono(alumnoMod.getTelefono());              
+	        alumnoExistente.setDni(alumnoMod.getDni());            
 	        alumnoRepository.save(alumnoMapDTO.convertirAlumnoDTOAAlumno(alumnoExistente));
 		}
 		
