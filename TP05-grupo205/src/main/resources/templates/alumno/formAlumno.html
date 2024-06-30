@@ -76,7 +76,7 @@
 		    <label for="listaMaterias" class="form-label">Materias</label>
 		    <select class="form-select" id="listaMaterias" name="listaMaterias" data-th-each="materia : ${listadoMaterias}">
 			  <option value="" disabled>Seleccione una materia o mas materias</option>
-			  <option data-th-value="${materia.nombre}" data-th-text="${materia.nombre}" data-th-selected="${materias.contains(materia.nombre)}"></option>
+			  <option data-th-value="${materia.codigo}" data-th-text="${materia.nombre}" data-th-selected="${materias.contains(materia.materia.codigo)}"></option>
 			</select>
 	  	  </div>
 		  <br>
