@@ -33,11 +33,10 @@
 	          <th>Dni</th>
 	          <th>Nombre</th>
 	          <th>Apellido</th>
-	          <th>Email</th>
-	          <th>Telefono</th>
-	          <th>Fecha de nacimiento</th>
-	          <th>Domicilio</th>
 	          <th>Libreta Universitaria</th>
+	          <th>Materias</th>
+	          <th>Carreras</th>
+	          <th>Edicion</th>
 	        </tr>
 	      </thead>
 	      <tbody data-th-each="alumno : ${listadoAlumnos}">
@@ -45,11 +44,21 @@
 	          <td data-th-text="${alumno.dni}"></td>
 	          <td data-th-text="${alumno.nombre}"></td>
 	          <td data-th-text="${alumno.apellido}"></td>
-	          <td data-th-text="${alumno.email}"></td>
-	          <td data-th-text="${alumno.telefono}"></td>
-	          <td data-th-text="${alumno.fechaNacimiento}"></td>
-	          <td data-th-text="${alumno.domicilio}"></td>
 	          <td data-th-text="${alumno.LU}"></td>
+	          <td>
+				    <ul>
+				        <li data-th-each="materia : ${alumno.materias}" data-th-text="${materia.nombre}">
+				            <a data-th-href="@{'/darDeBajaMateria/' + ${alumno.LU} + '/' + ${materia.codigo}}">Darme de Baja</a>
+				        </li>
+				    </ul>
+				</td>
+				<td>
+				    <ul>
+				        <li data-th-each="carrera : ${alumno.carreras}" data-th-text="${carrera.nombre}">
+				            <a data-th-href="@{'/darDeBajaCarrera/' + ${alumno.LU} + '/' + ${carrera.codigo}}">Darme de baja</a>
+				        </li>
+				    </ul>
+			  </td>
 	          <td>
 	          	<a data-th-href="@{'/borrarAlumno/'+${alumno.LU}}" class="btn btn-danger">Borrar</a>
 	          	<a data-th-href="@{'/modificarAlumno/'+${alumno.LU}}" class="btn btn-warning">Edicion</a>

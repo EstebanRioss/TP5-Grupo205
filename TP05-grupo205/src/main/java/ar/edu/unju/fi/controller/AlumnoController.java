@@ -10,98 +10,147 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.DTO.AlumnoDTO;
+import ar.edu.unju.fi.map.AlumnoMapDTO;
 import ar.edu.unju.fi.service.AlumnoService;
+import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
 @Controller
 public class AlumnoController {
-	
-	@Autowired
-	AlumnoDTO nuevoAlumnoDTO;
-	
-	@Autowired
-	AlumnoService alumnoService;
-	
-	@Autowired
-	MateriaService materiaService;
-	
-	@GetMapping("/formularioAlumno")
-	public ModelAndView getFormAlumno() {
-		ModelAndView modelView = new ModelAndView("alumno/formAlumno");
-		modelView.addObject("nuevoAlumno",nuevoAlumnoDTO);
-		modelView.addObject("band",false);
-		
-		return modelView;
-	}
-	
-	@GetMapping("/listadoAlumno")
+
+    @Autowired
+    AlumnoDTO nuevoAlumnoDTO;
+
+    @Autowired
+    AlumnoMapDTO alumnoMap;
+
+    @Autowired
+    AlumnoService alumnoService;
+
+    @Autowired
+    MateriaService materiaService;
+
+    @Autowired
+    CarreraService cs;
+
+    @GetMapping("/formularioAlumno")
+    public ModelAndView getFormAlumno() {
+        ModelAndView modelView = new ModelAndView("alumno/formAlumno");
+        modelView.addObject("nuevoAlumno", nuevoAlumnoDTO);
+        modelView.addObject("listaMaterias", materiaService.mostrarMaterias());
+        modelView.addObject("listaCarreras", cs.MostrarCarrera());
+        modelView.addObject("band", false);
+        return modelView;
+    }
+
+    @GetMapping("/listadoAlumno")
     public ModelAndView getListadoAlumno() {
-    	ModelAndView modelView = new ModelAndView("alumno/listaDeAlumnos");
-    	modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumno());
-    	return modelView;
+        ModelAndView modelView = new ModelAndView("alumno/listaDeAlumnos");
+        try {
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al obtener el listado de alumnos: " + e.getMessage());
+        }
+        return modelView;
     }
-	@GetMapping("/listadoAlumnoInactivo")
+
+    @GetMapping("/listadoAlumnoInactivo")
     public ModelAndView getListadoInactivoAlumno() {
-    	ModelAndView modelView = new ModelAndView("alumno/listaDeAlumnosInactivos");
-    	modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumnoInactivos());
-    	return modelView;
+        ModelAndView modelView = new ModelAndView("alumno/listaDeAlumnosInactivos");
+        try {
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnoInactivos());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al obtener el listado de alumnos inactivos: " + e.getMessage());
+        }
+        return modelView;
     }
 
-	
-	@PostMapping("/guardarAlumno")
-	public ModelAndView saveAlumno(@Valid @ModelAttribute ("nuevoAlumno") AlumnoDTO Alumno, BindingResult resultado) {
-		
-		ModelAndView modelView = new ModelAndView();
-		alumnoService.guardarAlumno(Alumno);
-		if(resultado.hasErrors()){
-			modelView.setViewName("alumno/formAlumno");
-		}else {
-		modelView.setViewName("alumno/listaDeAlumnos");
-		modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumno());
-		modelView.addObject("listadoMaterias",materiaService.mostrarMaterias());
-		}
-		return modelView;
-	}
-	@GetMapping("/borrarAlumno/{LU}")
-	public ModelAndView borrarAlumno(@PathVariable(name="LU") String LU){
-		//ListadoAlumnos.eliminarAlumno(LU);
-		alumnoService.borrarAlumno(LU);
-		
-		ModelAndView modelView = new ModelAndView("/Alumno/listaDeAlumnos");
-		modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumno());
-		
-		return modelView;
-	}
-	
-	@GetMapping("/modificarAlumno/{LU}")
-	public ModelAndView mostrarFormularioModificarAlumno(@PathVariable(name="LU") String LU){
-		ModelAndView modelView = new ModelAndView("Alumno/formAlumno");
-		modelView.addObject("nuevoAlumno", alumnoService.buscarAlumno(LU));
-		modelView.addObject("band",false);
+    @PostMapping("/guardarAlumno")
+    public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") AlumnoDTO Alumno, BindingResult resultado) {
+        ModelAndView modelView = new ModelAndView();
+        try {
+            if (resultado.hasErrors()) {
+                modelView.setViewName("alumno/formAlumno");
+                modelView.addObject("nuevoAlumno", Alumno);
+                modelView.addObject("listaMaterias", materiaService.mostrarMaterias());
+                modelView.addObject("listaCarreras", cs.MostrarCarrera());
+            } else {
+                alumnoService.guardarAlumno(Alumno);
+                modelView.setViewName("alumno/listaDeAlumnos");
+                modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+            }
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al guardar el alumno: " + e.getMessage());
+            modelView.setViewName("alumno/formAlumno");
+            modelView.addObject("nuevoAlumno", Alumno);
+            modelView.addObject("listaMaterias", materiaService.mostrarMaterias());
+            modelView.addObject("listaCarreras", cs.MostrarCarrera());
+        }
+        return modelView;
+    }
 
-		return modelView;
-	}
-	
-	@PostMapping("/guardarModAlumno")
-	public ModelAndView guardarModificacionAlumno(@ModelAttribute ("nuevoAlumno") AlumnoDTO Alumno) {
-		
-		alumnoService.modificarAlumno(Alumno);
-		ModelAndView modelView = new ModelAndView("Alumno/listaDeAlumnos");
-		modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumno());
-		
-		return modelView;
-	}
-	
-	@GetMapping("/DardeAltaAlumno/{LU}")
-	public ModelAndView DarDeAltaAlumno(@PathVariable(name="LU") String LU){
-		//ListadoAlumnos.eliminarAlumno(LU);
-		alumnoService.DardeAlta(LU);
-		
-		ModelAndView modelView = new ModelAndView("/Alumno/listaDeAlumnos");
-		modelView.addObject("listadoAlumnos",alumnoService.mostrarAlumno());
-		
-		return modelView;
-	}
-	
+    @GetMapping("/borrarAlumno/{LU}")
+    public ModelAndView borrarAlumno(@PathVariable(name = "LU") String LU) {
+        ModelAndView modelView = new ModelAndView("/Alumno/listaDeAlumnos");
+        try {
+            alumnoService.borrarAlumno(LU);
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al borrar el alumno: " + e.getMessage());
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        }
+        return modelView;
+    }
+
+    @GetMapping("/modificarAlumno/{LU}")
+    public ModelAndView mostrarFormularioModificarAlumno(@PathVariable(name = "LU") String LU) {
+        ModelAndView modelView = new ModelAndView("Alumno/formAlumno");
+        try {
+            modelView.addObject("nuevoAlumno", alumnoService.buscarAlumno(LU));
+            modelView.addObject("listaMaterias", materiaService.mostrarMaterias());
+            modelView.addObject("listaCarreras", cs.MostrarCarrera());
+            modelView.addObject("band", false);
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al cargar datos del alumno para modificar: " + e.getMessage());
+        }
+        return modelView;
+    }
+
+    @PostMapping("/guardarModAlumno")
+    public ModelAndView guardarModificacionAlumno(@ModelAttribute("nuevoAlumno") AlumnoDTO Alumno) {
+        ModelAndView modelView = new ModelAndView("Alumno/listaDeAlumnos");
+        try {
+            alumnoService.modificarAlumno(Alumno);
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al modificar el alumno: " + e.getMessage());
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        }
+        return modelView;
+    }
+
+    @GetMapping("/DardeAltaAlumno/{LU}")
+    public ModelAndView DarDeAltaAlumno(@PathVariable(name = "LU") String LU) {
+        ModelAndView modelView = new ModelAndView("/Alumno/listaDeAlumnos");
+        try {
+            alumnoService.DardeAlta(LU);
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al dar de alta al alumno: " + e.getMessage());
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        }
+        return modelView;
+    }
+    @GetMapping("/darDeBajaMateria/{LU}/{codigoMateria}")
+    public ModelAndView darDeBajaMateria(@PathVariable("LU") String LU, @PathVariable("codigoMateria") String codigoMateria) {
+        alumnoService.darDeBajaMateria(LU, codigoMateria);
+        return new ModelAndView("redirect:/listadoAlumno"); // Redirecciona al listado de alumnos después de dar de baja
+    }
+    
+    @GetMapping("/darDeBajaCarrera/{LU}/{codigoCarrera}")
+    public ModelAndView darDeBajaCarrera(@PathVariable("LU") String LU, @PathVariable("codigoCarrera") String codigoCarrera) {
+        alumnoService.darDeBajaCarrera(LU, codigoCarrera);
+        return new ModelAndView("redirect:/listadoAlumno"); // Redirecciona al listado de alumnos después de dar de baja
+    }
 }

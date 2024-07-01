@@ -1,16 +1,22 @@
 package ar.edu.unju.fi.DTO;
 
+
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.CascadeType;
+import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.model.Materia;
 import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -25,25 +31,39 @@ import lombok.Setter;
 public class AlumnoDTO {
 	
 	@Id
-    @Column(unique = true)
-	private String LU;
+	@Column(unique = true)
+    private String LU;
 	
-	@NotBlank(message = "Debe ingresar su DNI")
-    @Pattern(regexp = "\\d+", message = "El DNI debe contener solo numeros")
-	private String dni;	
+	@Pattern(regexp = "\\d+", message = "El DNI debe contener solo números")
+	private String dni;
 	
-	@NotBlank(message = "Debe ingresar su nombre")
-    @Size(min = 3, max = 20, message = "El nombre debe contener como minimo 3 caracteres y como maximo 20 caracteres")
+	@Size(min = 3, max = 20, message = "El nombre debe contener como mínimo 3 caracteres y como máximo 20 caracteres")
     private String nombre;
-    
-    @NotBlank(message = "Debe ingresar su apellido")
-    @Size(min = 3, max = 20, message = "El apellido debe contener como minimo 3 caracteres y como maximo 20 caracteres")
+	
+	@Size(min = 3, max = 20, message = "El apellido debe contener como mínimo 3 caracteres y como máximo 20 caracteres")
     private String apellido;
     
-    @NotNull(message = "Debe especificar el estado")
+	@NotBlank(message = "Debe ingresar su correo")
+    @Email(message = "Debe ingresar un correo válido")
+    private String email;
+	
+	@NotBlank(message = "Debe ingresar su teléfono")
+    @Pattern(regexp = "\\d+", message = "El teléfono debe contener solo números")
+    private String telefono;
+	
+    @Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual")
+    private Date fechaNacimiento;
+	
+	@NotBlank(message = "Debe ingresar su domicilio")
+    @Size(min = 3, max = 20, message = "El domicilio debe contener como mínimo 3 caracteres y como máximo 20 caracteres")
+    private String domicilio;
+	
+	@NotNull(message = "Debe ingresar el estado")
     private Boolean estado;
-    
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<String> codigoMateria;
-    
+	
+	@OneToMany
+    private List<Carrera> carreras = new ArrayList<Carrera>();
+	
+	@ManyToMany
+	private List<Materia> Materias = new ArrayList<Materia>();
 }
