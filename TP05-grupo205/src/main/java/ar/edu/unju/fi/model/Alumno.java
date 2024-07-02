@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -30,8 +31,9 @@ public class Alumno {
     private String domicilio;
     private Boolean estado;
     
-    @OneToMany
-    private List<Carrera> carreras = new ArrayList<Carrera>();
+    @ManyToOne
+    @JoinColumn(name = "codigo_carrera")
+    private Carrera carrera;
     
     @ManyToMany
     private List<Materia> Materias = new ArrayList<Materia>();
