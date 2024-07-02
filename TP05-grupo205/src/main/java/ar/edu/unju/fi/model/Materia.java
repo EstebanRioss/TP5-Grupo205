@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.model;
 
-
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import lombok.Data;
 @Component
 @Entity
 public class Materia {
-	@Id
+	  @Id
     private String codigo;    
     private String nombre;
     private String curso;

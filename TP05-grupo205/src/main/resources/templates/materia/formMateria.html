@@ -19,7 +19,7 @@
 <br>
 <br>
 
-<div class="container" data-bs-theme="dark"> 
+<div class="container" data-bs-theme="dark">
 	<h1>Formulario Materia</h1>
 	<form data-th-object="${nuevaMateria}" data-th-action="${band}?@{/GuardarModMateria}:@{/guardarMateria}" method="post">
 	  <div class="col-md-4">
@@ -53,6 +53,7 @@
 		  </select>
 	  </div>
 
+
 	  
 	  <div class="col-md-4">
 	    <label for="estado" class="form-label">Estado</label>
@@ -70,7 +71,6 @@
         <option data-th-each="carrera : ${listaCarreras}" data-th-value="${carrera.codigo}" data-th-text="${carrera.nombre}" data-th-selected="${carrera.codigo == nuevaMateria.carrera.codigo}"></option>
     </select>      
 	</div>
-	   	
 	  
 	  <br>
 	  <button type="submit" class="btn btn-primary">Guardar Carrera</button>
