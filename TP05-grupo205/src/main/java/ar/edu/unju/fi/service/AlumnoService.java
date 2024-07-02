@@ -19,4 +19,6 @@ public interface AlumnoService {
 	public AlumnoDTO buscarAlumno(String codigo);
 	public void darDeBajaMateria(String LU, String codigoMateria);
     public void darDeBajaCarrera(String LU, String codigoCarrera);
+    public void darDeAltaMateria(String LU, String codigoMateria);
+    public void darDeAltaCarrera(String LU, String codigoCarrera);
 }

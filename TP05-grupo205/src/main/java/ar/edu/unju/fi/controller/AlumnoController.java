@@ -65,6 +65,17 @@ public class AlumnoController {
         }
         return modelView;
     }
+    
+    @GetMapping("/listadoMateriasCarreras/{LU}")
+    public ModelAndView getListadoMateriasCarreras(@PathVariable(name = "LU") String LU){
+        ModelAndView modelView = new ModelAndView("alumno/listaDeMateriasCarrerasDeAlumno");
+        try {
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al obtener el listado de alumnos inactivos: " + e.getMessage());
+        }
+        return modelView;
+    }
 
     @PostMapping("/guardarAlumno")
     public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") AlumnoDTO Alumno, BindingResult resultado) {
@@ -144,13 +155,73 @@ public class AlumnoController {
     }
     @GetMapping("/darDeBajaMateria/{LU}/{codigoMateria}")
     public ModelAndView darDeBajaMateria(@PathVariable("LU") String LU, @PathVariable("codigoMateria") String codigoMateria) {
-        alumnoService.darDeBajaMateria(LU, codigoMateria);
-        return new ModelAndView("redirect:/listadoAlumno"); // Redirecciona al listado de alumnos después de dar de baja
+    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMAteriasCarrerasDeAlumno");
+        try {
+            alumnoService.darDeBajaMateria(LU, codigoMateria);
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+            
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al dar de baja la materias: " + e.getMessage());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        }
+        return modelView;
     }
     
     @GetMapping("/darDeBajaCarrera/{LU}/{codigoCarrera}")
     public ModelAndView darDeBajaCarrera(@PathVariable("LU") String LU, @PathVariable("codigoCarrera") String codigoCarrera) {
-        alumnoService.darDeBajaCarrera(LU, codigoCarrera);
-        return new ModelAndView("redirect:/listadoAlumno"); // Redirecciona al listado de alumnos después de dar de baja
+    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMAteriasCarrerasDeAlumno");
+        try {
+            alumnoService.darDeBajaCarrera(LU, codigoCarrera);
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+            
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al dar de baja la carrera: " + e.getMessage());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        }
+        return modelView;
     }
+    
+    @GetMapping("/darDeAltaMateria/{LU}/{codigoMateria}")
+    public ModelAndView darDeAltaMateria(@PathVariable("LU") String LU, @PathVariable("codigoMateria") String codigoMateria) {
+    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMAteriasCarrerasDeAlumno");
+        try {
+            alumnoService.darDeAltaMateria(LU, codigoMateria);
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+            
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al dar de baja la materias: " + e.getMessage());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        }
+        return modelView;
+    }
+    
+    @GetMapping("/darDeAltaCarrera/{LU}/{codigoCarrera}")
+    public ModelAndView darDeAltaCarrera(@PathVariable("LU") String LU, @PathVariable("codigoCarrera") String codigoCarrera) {
+    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMAteriasCarrerasDeAlumno");
+        try {
+            alumnoService.darDeAltaCarrera(LU, codigoCarrera);
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+            
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al dar de baja la materias: " + e.getMessage());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        }
+        return modelView;
+    }
+    @GetMapping("/listadoMateriasCarrerasIncripcion/{LU}")
+    public ModelAndView getListadoMateriasCarrerasDisponibles(@PathVariable("LU") String LU){
+        ModelAndView modelView = new ModelAndView("alumno/listaDeMateriasCarreras");
+        try {
+            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+            modelView.addObject("listadoMaterias",materiaService.mostrarMaterias());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al obtener el listado de alumnos inactivos: " + e.getMessage());
+            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+            modelView.addObject("listadoMaterias",materiaService.mostrarMaterias());
+            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        }
+        return modelView;
+    }
+    
 }

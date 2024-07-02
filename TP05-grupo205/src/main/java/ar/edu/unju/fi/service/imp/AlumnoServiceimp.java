@@ -11,7 +11,10 @@ import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.map.AlumnoMapDTO;
 import ar.edu.unju.fi.map.MateriaMapDTO;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.MateriaService;
@@ -35,6 +38,9 @@ public class AlumnoServiceimp implements AlumnoService{
 	
 	@Autowired
 	MateriaService materiaService;
+	
+	@Autowired
+	CarreraRepository carreraRepository;
 	
 	
 	@Override
@@ -132,19 +138,6 @@ public class AlumnoServiceimp implements AlumnoService{
 	}
 	
 	@Override
-	public void darDeBajaMateria(String LU, String codigoMateria) {
-		logger.info("Dando de baja materia {} para el alumno con código: {}", codigoMateria, LU);
-        Alumno alumno = alumnoRepository.findById(LU).orElse(null);
-        if (alumno != null) {
-            alumno.getMaterias().removeIf(materia -> materia.getCodigo().equals(codigoMateria));
-            alumnoRepository.save(alumno);
-            logger.info("Materia {} dada de baja correctamente para el alumno con código: {}", codigoMateria, LU);
-        }else {
-        	logger.warn("No se encontró al alumno con código: {}", LU);
-        }
-    }
-
-    @Override
     public void darDeBajaCarrera(String LU, String codigoCarrera) {
         logger.info("Dando de baja carrera {} para el alumno con código: {}", codigoCarrera, LU);
         Alumno alumno = alumnoRepository.findById(LU).orElse(null);
@@ -156,5 +149,58 @@ public class AlumnoServiceimp implements AlumnoService{
             logger.warn("No se encontró al alumno con código: {}", LU);
         }
     }
+
+	 @Override
+	 public void darDeBajaMateria(String LU, String codigoMateria) {
+	      logger.info("Dando de baja materia {} para el alumno con código: {}", codigoMateria, LU);
+	      Alumno alumno = alumnoRepository.findById(LU).orElse(null);
+	      if (alumno != null) {
+	          alumno.getMaterias().removeIf(materia -> materia.getCodigo().equals(codigoMateria));
+	          alumnoRepository.save(alumno);
+	          logger.info("Materia {} dada de baja correctamente para el alumno con código: {}", codigoMateria, LU);
+	      } else {
+	          logger.warn("No se encontró al alumno con código: {}", LU);
+	        }
+	}
+
+	@Override
+	public void darDeAltaMateria(String LU, String codigoMateria) {
+		// TODO Auto-generated method stub
+		logger.info("Dando de alta la materia con código {} para el alumno con LU {}", codigoMateria, LU);
+        Alumno alumno = alumnoRepository.findById(LU).orElse(null);
+        Materia materia = materiaRepository.findById(codigoMateria).orElse(null);
+        if (alumno != null && materia != null) {
+            if (!alumno.getMaterias().contains(materia)) {
+                alumno.getMaterias().add(materia);
+                alumnoRepository.save(alumno);
+                logger.info("Materia con código {} añadida exitosamente al alumno con LU {}", codigoMateria, LU);
+            } else {
+                logger.warn("La materia con código {} ya está presente para el alumno con LU {}", codigoMateria, LU);
+            }
+        } else {
+            logger.error("Error al añadir la materia: Alumno o Materia no encontrados.");
+        }
+	}
+
+	@Override
+    public void darDeAltaCarrera(String LU, String codigoCarrera) {
+        logger.info("Dando de alta la carrera con código {} para el alumno con LU {}", codigoCarrera, LU);
+        Alumno alumno = alumnoRepository.findById(LU).orElse(null);
+        Carrera carrera = carreraRepository.findById(codigoCarrera).orElse(null);
+        if (alumno != null && carrera != null) {
+            if (!alumno.getCarreras().contains(carrera)) {
+                alumno.getCarreras().add(carrera);
+                alumnoRepository.save(alumno);
+                logger.info("Carrera con código {} añadida exitosamente al alumno con LU {}", codigoCarrera, LU);
+            } else {
+                logger.warn("La carrera con código {} ya está presente para el alumno con LU {}", codigoCarrera, LU);
+            }
+        } else {
+            logger.error("Error al añadir la carrera: Alumno o Carrera no encontrados.");
+        }
+    }
+
+    
+    
 
 }
