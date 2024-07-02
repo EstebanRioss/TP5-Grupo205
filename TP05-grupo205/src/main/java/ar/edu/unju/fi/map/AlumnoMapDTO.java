@@ -5,29 +5,27 @@ import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-
 import ar.edu.unju.fi.DTO.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = "spring")
 public interface AlumnoMapDTO {
-    
-    @Mapping(source="estado", target="estado")
-	@Mapping(source="nombre", target="nombre")
-    @Mapping(source="dni", target="dni")
-    @Mapping(source="apellido",target = "apellido")
-	@Mapping(source="domicilio",target = "domicilio")
-    @Mapping(source= "fechaNacimiento",target="fechaNacimiento")
-	@Mapping(source="email",target = "email")
-	@Mapping(source="LU",target = "LU")
-	@Mapping(source="telefono",target = "telefono")
+
+
+	@Mapping(target = "LU", source = "LU")
+    @Mapping(target = "dni", source = "dni")
+    @Mapping(target = "nombre", source = "nombre")
+    @Mapping(target = "apellido", source = "apellido")
+    //@Mapping(target = "estado", source = "estado")
+    //@Mapping(target = "telefono", source = "telefono")
+    //@Mapping(target = "domicilio", source = "domicilio")
+    //@Mapping(target = "email", source = "email")
+    //@Mapping(target = "fechaNacimiento", source = "fechaNacimiento")
     AlumnoDTO convertirAlumnoAAlumnoDTO(Alumno a);
     
-    
-	@InheritInverseConfiguration
-    Alumno convertirAlumnoDTOAAlumno(AlumnoDTO adto);
-    
+	@InheritInverseConfiguration(name = "convertirAlumnoAAlumnoDTO")
+    Alumno convertirAlumnoDTOAAlumno(AlumnoDTO aDTO);
+
     List<AlumnoDTO> convertirListaAlumnoAListaAlumnoDTO(List<Alumno> listaA);
     List<Alumno> convertirListaAlumnoDTOAListaAlumno(List<AlumnoDTO> listaADTO);
 }

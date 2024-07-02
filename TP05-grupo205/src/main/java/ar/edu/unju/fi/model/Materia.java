@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,6 +17,9 @@ public class Materia {
 	private int cantidadHoras;
 	private String modalidad;
 	private Boolean estado;
+	//pipo
+	private List<String> codigoAlumno;
+	
 	//@ManyToOne
 	//private Carrera carrera;
 	//@ManyToOne
