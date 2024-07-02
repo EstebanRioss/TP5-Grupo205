@@ -20,13 +20,14 @@
 <br>
 <br>
 <br>
+ 
 <div class="container">
-  <h1>Listado de las Materias activas</h1>
+  <h1>Listado de las Materias alumno</h1>
   <br>
-  <a data-th-href="@{/formularioMateria}" class="btn btn-primary">Agregar Materia</a>
-  <a data-th-href="@{/listadoMateriaInactiva}" class="btn btn-primary">Lista De Materias Inactivas</a>
+  <a data-th-href="@{'/listadoMateriasCarreras/'+${alumno.LU}}" class="btn btn-success">Ver Materias y Carreras Incriptas</a>
+  <a data-th-href="@{/listadoAlumno}" class="btn btn-primary">Ver los alumnos</a>
   <br>
-  <div class="table-responsive">
+ <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -35,7 +36,6 @@
           <th>Curso</th>
           <th>Cantidad de horas</th>
           <th>Modalidad</th>
-          <th>Carrera</th>
           <th>Edicion</th>
         </tr>
       </thead>
@@ -46,12 +46,36 @@
           <td data-th-text="${materia.curso}"></td>
           <td data-th-text="${materia.cantidadHoras}"></td>
           <td data-th-text="${materia.modalidad}"></td>
-          <td data-th-text="${materia.carrera.nombre}"></td>
-          
           <td>
-          	<a data-th-href="@{'/borrarMateria/'+${materia.codigo}}" class="btn btn-danger">Borrar</a>
-          	<a data-th-href="@{'/modificarMateria/'+${materia.codigo}}" class="btn btn-warning">Edicion</a>
-          	<a data-th-href="@{'/listadoAlumnoMateria/'+${materia.codigo}}" class="btn btn-success">Ver alumnos incriptos</a>
+          	<a data-th-href="@{'/darDeAltaMateria/' + ${alumno.LU} + '/' + ${materia.codigo}}" class="btn btn-success">Incribirme</a>
+          </td>
+        </tr>
+      </tbody>
+     </table>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Listado de las carreras alumno</h1>
+  <br>
+  <br>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Código</th>
+          <th>Años</th>
+          <th>Edicion</th>
+        </tr>
+      </thead>
+      <tbody data-th-each="carrera : ${listadoCarreras}">
+        <tr>
+          <td data-th-text="${carrera.nombre}"></td>
+          <td data-th-text="${carrera.codigo}"></td>
+          <td data-th-text="${carrera.duracion}"></td>
+          <td>
+          	<a data-th-href="@{'/darDeAltaCarrera/' + ${alumno.LU} + '/' + ${carrera.codigo}}" class="btn btn-success">Incribirme</a>
           </td>
         </tr>
       </tbody>

@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Tp05-EstebanRios</title>
 </head>
-<body>
-	<div class="container">
+<body data-bs-theme="dark">
+	<div class="body">
 		<header>
 			<div data-th-replace="~{layouts/header::navbar}">
 			</div>
 		</header>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">	
@@ -20,7 +28,7 @@
 				            <h2 class="mb-4">Acerca de</h2>
 				            <div class="card">
 				            	<div class="card-body">
-						            <p class="text-dark">
+						            <p class="type-text">
 						               La Facultad de Leon de la Universidad Nacional de Jujuy es un bastión del saber y la investigación en la región noroeste de Argentina. Con una trayectoria arraigada en la excelencia académica y el compromiso con el desarrollo regional, nuestra facultad se erige como un faro de conocimiento, un lugar donde las mentes curiosas encuentran un hogar para explorar, descubrir y transformar el mundo que les rodea. Desde sus inicios, la Facultad de Ciencias Leon ha sido un motor de cambio en la comunidad, colaborando estrechamente con instituciones locales y globales para abordar los desafíos más apremiantes de nuestra sociedad. Con una amplia gama de programas de estudio en áreas como la ciencia, la tecnología, la ingeniería y las ciencias sociales, nuestra facultad ofrece a sus estudiantes la oportunidad de adquirir conocimientos de vanguardia y desarrollar habilidades prácticas que les preparen para los desafíos del siglo XXI. Desde las aulas hasta los laboratorios de investigación de última generación, fomentamos un ambiente de aprendizaje interactivo donde la creatividad y la innovación florecen, y donde cada estudiante es animado a alcanzar su máximo potencial. Con una comunidad diversa y dinámica de estudiantes, profesores y personal, la Facultad de Ciencias Leon UNJU es más que una institución educativa: es un centro de inspiración y descubrimiento que impulsa el progreso y la transformación en nuestra región y más allá.
 						            </p>
 					            </div>
@@ -111,6 +119,16 @@
 					                        </div>
 					                    </div>
 					                </div>
+					                <div class="col-md-6 mb-4">
+					                    <div class="card">
+					                        <div class="card-body">
+					                            <h5 class="card-title">Mas carreras</h5>
+					                            <p class="card-text">
+					                                Para saber que carreras estan disponibles en la Facultad de Leon haga click<a class="link-offset-2 link-underline link-underline-opacity-0"href="/listadoCarrera"> aca</a>
+					                            </p>
+					                        </div>
+					                    </div>
+					                </div>
 					            </div>
 					        </section>
 					    </div>
@@ -163,6 +181,7 @@
 				</div>
 				<div class="col-md-1">
 					<aside class="position-fixed" style="top: 10000;">
+						
 						<div class="card">
 							<div class="card-body">
 								<h3>Biblioteca Virtual</h3>
@@ -175,12 +194,13 @@
 								</a>
 											
 							</div>
-						</div>				
+						</div>
+										
 					</aside>
 				</div>
 			</div>
 		</div>
-		<footer>
+		<footer id="footer">
 			<div data-th-replace="~{layouts/footer::footer}">
 			</div>
 		</footer>
