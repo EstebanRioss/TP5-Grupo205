@@ -40,7 +40,7 @@ public class CarreraDTO {
     @NotNull(message = "El estado no puede ser nulo")
     private Boolean estado;
 	
-	@OneToMany
+    @OneToMany(mappedBy = "carrera")
 	private List<Alumno> alumnos = new ArrayList<Alumno>();
 	
 	@OneToMany

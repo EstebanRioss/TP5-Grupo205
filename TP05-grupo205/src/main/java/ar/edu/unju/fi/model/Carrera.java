@@ -20,10 +20,10 @@ public class Carrera {
 	private Integer duracion;
 	private Boolean estado;
 	
-	@OneToMany
-	private List<Alumno> alumnos = new ArrayList<Alumno>();
+	@OneToMany(mappedBy = "carrera")
+	private List<Alumno> alumnos = new ArrayList<>();
 	
 	@OneToMany
-	private List<Materia> materias = new ArrayList<Materia>();
+	private List<Materia> materias = new ArrayList<>();
 	
 }

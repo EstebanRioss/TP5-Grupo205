@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
+
 @Data
 @Component
 @Entity
