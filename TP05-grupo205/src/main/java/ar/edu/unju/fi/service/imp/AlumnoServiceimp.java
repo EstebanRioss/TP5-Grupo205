@@ -174,7 +174,9 @@ public class AlumnoServiceimp implements AlumnoService{
 	     if (alumno != null && materia != null) {
 	         if (!alumno.getMaterias().contains(materia)) {
 	             alumno.getMaterias().add(materia);
+	             materia.getAlumnos().add(alumno);
 	             alumnoRepository.save(alumno);
+	             materiaRepository.save(materia);
 	             logger.info("Materia con código {} añadida exitosamente al alumno con LU {}", codigoMateria, LU);
 	         } else {
 	             logger.warn("La materia con código {} ya está presente para el alumno con LU {}", codigoMateria, LU);

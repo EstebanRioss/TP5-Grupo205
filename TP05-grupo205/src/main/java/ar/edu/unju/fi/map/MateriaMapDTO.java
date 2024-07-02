@@ -17,6 +17,7 @@ public interface MateriaMapDTO {
 	@Mapping(source = "modalidad", target = "modalidad")
 	@Mapping(source = "estado", target = "estado")
 	@Mapping(source = "cantidadHoras", target = "cantidadHoras")
+	@Mapping(source="carrera" , target="carrera")
 	
 	MateriaDTO toDto(Materia materia);
 	@Mapping(target = "codigoAlumno", ignore = true)

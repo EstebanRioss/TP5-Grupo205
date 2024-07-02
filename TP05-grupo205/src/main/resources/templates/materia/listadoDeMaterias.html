@@ -35,6 +35,7 @@
           <th>Curso</th>
           <th>Cantidad de horas</th>
           <th>Modalidad</th>
+          <th>Carrera</th>
           <th>Edicion</th>
         </tr>
       </thead>
@@ -45,9 +46,11 @@
           <td data-th-text="${materia.curso}"></td>
           <td data-th-text="${materia.cantidadHoras}"></td>
           <td data-th-text="${materia.modalidad}"></td>
+          <td data-th-text="${materia.carrera.nombre}"></td>
           <td>
           	<a data-th-href="@{'/borrarMateria/'+${materia.codigo}}" class="btn btn-danger">Borrar</a>
           	<a data-th-href="@{'/modificarMateria/'+${materia.codigo}}" class="btn btn-warning">Edicion</a>
+          	<a data-th-href="@{'/listadoAlumnoMateria/'+${materia.codigo}}" class="btn btn-success">Ver alumnos incriptos</a>
           </td>
         </tr>
       </tbody>

@@ -25,18 +25,22 @@
 	  <div class="col-md-4">
 	    <label for="codigo" class="form-label">Codigo</label>
 	    <input type="text" class="form-control" id="codigo" data-th-field="*{codigo}" data-th-readonly="${band}" required>
+	    <p class="text-danger" data-th-if="${#fields.hasErrors('codigo')}" data-th-error="*{codigo}"></p>    
 	  </div>
 	  <div class="col-md-4">
 	    <label for="nombre" class="form-label">Nombre de la materia</label>
 	    <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}" required>
+	    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-error="*{nombre}"></p>
 	  </div>
 	  <div class="col-md-4">
 	    <label for="curso" class="form-label">Curso</label>
 	    <input type="text" class="form-control" id="curso" data-th-field="*{curso}" required>
+	    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('curso')}" data-th-error="*{curso}"></p>
 	  </div>
 	  <div class="col-md-4">
 	    <label for="cantidad" class="form-label">Cantidad de horas</label>
 	    <input type="number" class="form-control" id="cantidad" data-th-field="*{cantidadHoras}" required>
+	    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('cantidadHoras')}" data-th-error="*{cantidadHoras}"></p>
 	  </div>
 	
 	  <div class="col-md-4">
@@ -49,6 +53,7 @@
 		  </select>
 	  </div>
 
+
 	  
 	  <div class="col-md-4">
 	    <label for="estado" class="form-label">Estado</label>
@@ -59,13 +64,20 @@
 		</select>
 	  </div>
 	  
+	  <div class="col-md-4">
+    <label for="carreras" class="form-label">Carreras</label>
+    <select class="form-select" id="carreras" name="carreras" data-th-field="*{carrera.codigo}">
+        <option value="">Seleccione una carrera</option>
+        <option data-th-each="carrera : ${listaCarreras}" data-th-value="${carrera.codigo}" data-th-text="${carrera.nombre}" data-th-selected="${carrera.codigo == nuevaMateria.carrera.codigo}"></option>
+    </select>      
+	</div>
+	  
 	  <br>
 	  <button type="submit" class="btn btn-primary">Guardar Carrera</button>
 	  <br>
       <br>
-	</form>
+      </form>
 </div>
-
 <footer>
 <div data-th-replace="~{layouts/footer::footer}"></div>
 </footer>

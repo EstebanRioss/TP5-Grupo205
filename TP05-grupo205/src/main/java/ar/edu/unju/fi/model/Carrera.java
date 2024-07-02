@@ -22,8 +22,8 @@ public class Carrera {
 	
 	@OneToMany(mappedBy = "carrera")
 	private List<Alumno> alumnos = new ArrayList<>();
-	
-	@OneToMany
+  
+	@OneToMany(mappedBy = "carrera")
 	private List<Materia> materias = new ArrayList<>();
 	
 }

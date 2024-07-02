@@ -43,6 +43,6 @@ public class CarreraDTO {
     @OneToMany(mappedBy = "carrera")
 	private List<Alumno> alumnos = new ArrayList<Alumno>();
 	
-	@OneToMany
+	@OneToMany(mappedBy = "carrera")
 	private List<Materia> materias = new ArrayList<Materia>();
 }
