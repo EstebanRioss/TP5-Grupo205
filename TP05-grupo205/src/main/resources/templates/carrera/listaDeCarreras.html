@@ -44,6 +44,8 @@
           <td data-th-text="${carrera.duracion}"></td>
           <td>
           	<a data-th-href="@{'/borrarCarrera/'+${carrera.codigo}}" class="btn btn-danger">Borrar</a>
+		<a data-th-href="@{'/listadoAlumnoCarrera/'+${carrera.codigo}}" class="btn btn-success">Mostrar los alumnos Incriptos</a>
+          	<a data-th-href="@{'/listadoMateriaCarrera/'+${carrera.codigo}}" class="btn btn-success">Mostrar las materias</a>
           	<a data-th-href="@{'/modificarCarrera/'+${carrera.codigo}}" class="btn btn-warning">Edicion</a>
           </td>
         </tr>
