@@ -107,23 +107,42 @@ public class MateriaServiceImp implements MateriaService {
         logger.info("Mostrando todas las materias inactivas");
         return materiaRepository.findMateriaByEstado(false);
     }
-
+    
+    @Override
     public void darDeBajaAlumno(String codigo, String LU) {
         logger.info("Dando de baja alumno con LU {} de la carrera con código {}", LU, codigo);
+        
         Alumno alumno = alumnoRepository.findById(LU).orElse(null);
         Carrera carrera = carreraRepository.findById(codigo).orElse(null);
 
-        if (alumno != null && carrera != null) {
-            if (alumno.getCarrera() != null && alumno.getCarrera().equals(carrera)) {
-                alumno.setCarrera(null);
-                alumnoRepository.save(alumno);
-                carrera.getAlumnos().remove(alumno);
-                carreraRepository.save(carrera);
-            } else {
-                logger.warn("El alumno con LU {} no está asociado a la carrera con código {}", LU, codigo);
-            }
-        } else {
+        if (alumno == null || carrera == null) {
             logger.error("No se encontró al alumno con LU {} o a la carrera con código {}", LU, codigo);
+            return;
         }
+
+        if (alumno.getCarrera() == null || !alumno.getCarrera().equals(carrera)) {
+            logger.warn("El alumno con LU {} no está asociado a la carrera con código {}", LU, codigo);
+            return;
+        }
+
+        alumno.setCarrera(null);
+        alumnoRepository.save(alumno);
+
+        carrera.getAlumnos().remove(alumno);
+        carreraRepository.save(carrera);
+
+        logger.info("Alumno con LU {} dado de baja correctamente de la carrera con código {}", LU, codigo);
     }
+
+	@Override
+	public void borrarDefinitivoMateria(String codigo) {
+		// TODO Auto-generated method stub
+		Materia materia = materiaRepository.findById(codigo).orElse(null);
+	    
+	    if (materia != null) {
+	        materiaRepository.delete(materia);
+	        logger.info("Materia con código {} borrada definitivamente", codigo);
+	    }
+	}
+
 }

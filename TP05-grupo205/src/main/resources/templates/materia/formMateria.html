@@ -65,11 +65,11 @@
 	  </div>
 	  
 	  <div class="col-md-4">
-    <label for="carreras" class="form-label">Carreras</label>
-    <select class="form-select" id="carreras" name="carreras" data-th-field="*{carrera.codigo}">
+    	<label for="carreras" class="form-label">Carreras</label>
+    	<select class="form-select" id="carreras" name="carreras" data-th-field="*{carrera.codigo}">
         <option value="">Seleccione una carrera</option>
         <option data-th-each="carrera : ${listaCarreras}" data-th-value="${carrera.codigo}" data-th-text="${carrera.nombre}" data-th-selected="${carrera.codigo == nuevaMateria.carrera.codigo}"></option>
-    </select>      
+    	</select>      
 	</div>
 	  
 	  <br>

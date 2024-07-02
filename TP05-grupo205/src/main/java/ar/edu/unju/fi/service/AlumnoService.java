@@ -14,6 +14,7 @@ public interface AlumnoService {
 	public List<AlumnoDTO> mostrarAlumno();
 	public List<AlumnoDTO> mostrarAlumnoInactivos();
 	public void borrarAlumno(String codigo);
+	public void borrarDefinitivoAlumno(String codigo);
 	public void DardeAlta(String codigo);
 	public void modificarAlumno(AlumnoDTO alumnoDTO);
 	public AlumnoDTO buscarAlumno(String codigo);

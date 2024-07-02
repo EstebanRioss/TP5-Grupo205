@@ -21,6 +21,7 @@
 <br>
 <br>
 <div class="container">
+
   <h1>Listado de las Materias activas</h1>
   <br>
   <a data-th-href="@{/formularioMateria}" class="btn btn-primary">Agregar Materia</a>
@@ -39,23 +40,29 @@
           <th>Edicion</th>
         </tr>
       </thead>
+      
       <tbody data-th-each="materia : ${listadoMaterias}">
         <tr>
+         
           <td data-th-text="${materia.nombre}"></td>
           <td data-th-text="${materia.codigo}"></td>
           <td data-th-text="${materia.curso}"></td>
           <td data-th-text="${materia.cantidadHoras}"></td>
           <td data-th-text="${materia.modalidad}"></td>
           <td data-th-text="${materia.carrera.nombre}"></td>
+          
           <td>
           	<a data-th-href="@{'/borrarMateria/'+${materia.codigo}}" class="btn btn-danger">Borrar</a>
           	<a data-th-href="@{'/modificarMateria/'+${materia.codigo}}" class="btn btn-warning">Edicion</a>
           	<a data-th-href="@{'/listadoAlumnoMateria/'+${materia.codigo}}" class="btn btn-success">Ver alumnos incriptos</a>
           </td>
+
         </tr>
       </tbody>
+      
     </table>
   </div>
+  
 </div>
 
 <footer class="fixed-bottom">

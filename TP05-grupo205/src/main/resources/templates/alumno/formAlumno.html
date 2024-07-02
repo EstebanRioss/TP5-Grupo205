@@ -22,7 +22,7 @@
 	<div class="container" data-bs-theme="dark" >
 		<h1>Formulario Alumno</h1>
 		<form data-th-object="${nuevoAlumno}" data-th-action="${band}?@{/GuardarModAlumno}:@{/guardarAlumno}" method="post">
-		  
+		   
 		  <div class="col-md-4">
 		    <label for="dni" class="form-label">Dni</label>
 		    <input type="number" class="form-control" id="dni" data-th-field="*{dni}" data-th-readonly="${band}" >
@@ -67,24 +67,6 @@
 		    <input type="text" class="form-control" id="libretaUniversitaria" data-th-field="*{LU}" data-th-readonly="${band}" >
 		    <p class="form-text text-danger" data-th-if="${#fields.hasErrors('LU')}" data-th-error="*{LU}"></p>
 		  </div>
-		     
-		  <div class="col-md-4">
-		    <label for="materias" class="form-label">Materias</label>
-		    
-		    <select class="form-select" id="materias" multiple="multiple" name="materias" data-th-field="*{materias}">
-			<option data-th-each="materia : ${listaMaterias}" data-th-value="${materia.codigo}" data-th-text="${materia.nombre}"></option>
-			</select>
-	  	  	
-	  	  </div>
-	  	  
-	  	  <div class="col-md-4">
-		    <label for="carreras" class="form-label">Carreras</label>
-		    <select class="form-select" id="carreras" multiple="multiple" name="carreras" data-th-field="*{carreras}">
-			<option data-th-each="carrera : ${listaCarreras}" data-th-value="${carrera.codigo}" data-th-text="${carrera.nombre}"></option>
-			</select>
-	  	  	
-	  	  </div>
-		
 		  <div class="col-md-4">
 		    <label for="estado" class="form-label">Estado</label>
 		    <select class="form-select" id="estado" name="estado" data-th-field="*{estado}">

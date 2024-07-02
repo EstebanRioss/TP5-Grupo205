@@ -14,6 +14,7 @@ public interface DocenteService {
 	public List<DocenteDTO> MostrarDocenteInactivos();
 	public void save(DocenteDTO docenteDTO);
 	public void deleteByLegajo(String legajo);
+	public void deletDefinitiveeByLegajo(String legajo);
 	public void darDeAlta(String legajo);
 	public void edit(DocenteDTO docenteDTO);
 	public DocenteDTO buscaDocente(String legajo);

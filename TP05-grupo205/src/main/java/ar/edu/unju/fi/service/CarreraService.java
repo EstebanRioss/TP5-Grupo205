@@ -13,6 +13,7 @@ public interface CarreraService {
 		public List<CarreraDTO> MostrarCarrera();
 		public List<CarreraDTO> MostrarCarreraInactivas();
 		public void borrarCarrera(String codigo);
+		public void borrarDefinitivoCarrera(String codigo);
 		public void darDeAltaCarrera(String codigo);
 		public void modificarCarrera(CarreraDTO carreraDTO);
 		public CarreraDTO buscaCarrera(String codigo);

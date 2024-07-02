@@ -98,6 +98,16 @@ public class DocenteServiceImp implements DocenteService {
 		return docenteMapDTO.toDocenteDTOList(docenteRepository.findDocenteByEstado(false));
 	}
 
+	@Override
+	public void deletDefinitiveeByLegajo(String legajo) {
+		// TODO Auto-generated method stub
+	    Docente docente = docenteRepository.findById(legajo).orElse(null);
+	    
+	    if (docente != null) {
+	        docenteRepository.delete(docente);
+	    } 
+	}
+
 
 
 

@@ -113,6 +113,19 @@ public class AlumnoController {
         }
         return modelView;
     }
+    
+    @GetMapping("/borrarDefinitivoAlumno/{LU}")
+    public ModelAndView borrarDefinitivoAlumno(@PathVariable(name = "LU") String LU) {
+        ModelAndView modelView = new ModelAndView("/Alumno/listaDeAlumnos");
+        try {
+            alumnoService.borrarDefinitivoAlumno(LU);
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        } catch (Exception e) {
+            modelView.addObject("error", "Error al borrar el alumno: " + e.getMessage());
+            modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumno());
+        }
+        return modelView;
+    }
 
     @GetMapping("/modificarAlumno/{LU}")
     public ModelAndView mostrarFormularioModificarAlumno(@PathVariable(name = "LU") String LU) {

@@ -12,6 +12,7 @@ public interface MateriaService {
 	public List<Materia> mostrarMaterias();
 	public List<Materia> mostrarMateriasInactivas();
 	public void borrarMateria (String codigo);
+	public void borrarDefinitivoMateria (String codigo);
 	public void darDeAlta (String codigo);
 	public void darDeBajaAlumno (String codigo,String LU);
 	public void modificarMateria (MateriaDTO materia);

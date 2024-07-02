@@ -211,6 +211,20 @@ public class AlumnoServiceimp implements AlumnoService{
 	     }
 	 }
 
+	@Override
+	public void borrarDefinitivoAlumno(String codigo) {
+		// TODO Auto-generated method stub
+		logger.info("Borrando definitivamente alumno con código: {}", codigo);
+	    Alumno alumno = alumnoRepository.findById(codigo).orElse(null);
+	    
+	    if (alumno != null) {
+	        alumnoRepository.delete(alumno);
+	        logger.info("Alumno con código {} borrado definitivamente", codigo);
+	    } else {
+	        logger.warn("No se encontró al alumno con código {} para borrar", codigo);
+	    }
+	}
+
     
     
 

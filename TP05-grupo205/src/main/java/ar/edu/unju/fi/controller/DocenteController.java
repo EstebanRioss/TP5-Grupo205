@@ -64,6 +64,15 @@ public class DocenteController {
 		return modelView;
 	}
 	
+	@GetMapping("/borrarDefinitivoDocente/{legajo}")
+	public ModelAndView borrarDefinitivoDocente(@PathVariable(name="legajo") String legajo){
+		docenteService.deletDefinitiveeByLegajo(legajo);
+		ModelAndView modelView = new ModelAndView("docente/listadoDeDocentes");
+		modelView.addObject("listadoDocentes",docenteService.MostrarDocente());
+		
+		return modelView;
+	}
+	
 	@GetMapping("/modificarDocente/{legajo}")
 	public ModelAndView mostrarFormularioModificarAlumno(@PathVariable(name="legajo") String legajo){
 		ModelAndView modelView = new ModelAndView("docente/formDocente");

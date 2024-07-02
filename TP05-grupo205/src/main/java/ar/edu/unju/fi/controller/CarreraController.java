@@ -68,30 +68,45 @@ public class CarreraController {
             modelView.addObject("band", false); // Si es necesario manejar el band en caso de errores
             return modelView;
         }
-
         cs.guardarCarrera(carrera);
-        modelView.setViewName("redirect:/carrera/listadoCarrera");
+        modelView.setViewName("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
+        
+        
         return modelView;
     }
 
     @GetMapping("/borrarCarrera/{codigo}")
     public ModelAndView borrarCarrera(@PathVariable(name = "codigo") String codigo) {
         cs.borrarCarrera(codigo);
-        ModelAndView modelView = new ModelAndView("redirect:/carrera/listadoCarrera");
+        ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
+        return modelView;
+    }
+    
+    @GetMapping("/borrarDefinitivoCarrera/{codigo}")
+    public ModelAndView borrarDefinitivoCarrera(@PathVariable(name = "codigo") String codigo) {
+        cs.borrarDefinitivoCarrera(codigo);
+        ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
         return modelView;
     }
 
     @GetMapping("/darDeBajaAlumnoDeCarrera/{codigoCarrera}/{LU}")
     public ModelAndView darDeBajaAlumnoDeCarrera(@PathVariable(name = "codigoCarrera") String codigoCarrera, @PathVariable(name = "LU") String LU) {
         cs.darDeBajaAlumnoDeCarrera(codigoCarrera, LU);
-        ModelAndView modelView = new ModelAndView("redirect:/carrera/listadoAlumnoCarrera/" + codigoCarrera);
+        ModelAndView modelView = new ModelAndView("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
         return modelView;
     }
 
     @GetMapping("/DardeAltaCarrera/{codigo}")
     public ModelAndView DarDeAlta(@PathVariable(name = "codigo") String codigo) {
         cs.darDeAltaCarrera(codigo);
-        ModelAndView modelView = new ModelAndView("redirect:/carrera/listadoCarrera");
+        ModelAndView modelView = new ModelAndView("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
         return modelView;
     }
 
@@ -113,16 +128,18 @@ public class CarreraController {
             modelView.addObject("band", true); // Para manejar la modificación
             return modelView;
         }
-
         cs.modificarCarrera(carrera);
-        modelView.setViewName("redirect:/carrera/listadoCarrera");
+        modelView.setViewName("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
         return modelView;
     }
 
     @GetMapping("/darDeBajaMateriaDeCarrera/{codigoCarrera}/{codigoMateria}")
     public ModelAndView darDeBajaMateriaDeCarrera(@PathVariable(name = "codigoCarrera") String codigoCarrera, @PathVariable(name = "codigoMateria") String codigoMateria) {
         cs.darDeBajaMateriaDeCarrera(codigoCarrera, codigoMateria);
-        ModelAndView modelView = new ModelAndView("redirect:/carrera/listadoMateriaCarrera/" + codigoCarrera);
+        ModelAndView modelView = new ModelAndView("carrera/listaDeCarreras");
+        modelView.addObject("listadoCarreras", cs.MostrarCarrera());
+        
         return modelView;
     }
 }

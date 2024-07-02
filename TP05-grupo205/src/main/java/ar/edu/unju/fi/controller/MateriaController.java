@@ -72,12 +72,20 @@ public class MateriaController {
     @GetMapping("/darDeBajaAlumnoDeMateria/{codigoMateria}/{LU}")
     public ModelAndView darDeBajaAlumnoDeMateria(@PathVariable(name = "codigoMateria") String codigoMateria, @PathVariable(name = "LU") String LU) {
         materiaService.darDeBajaAlumno(codigoMateria, LU);
-        return new ModelAndView("redirect:/listadoAlumnoMateria/" + codigoMateria);
+        ModelAndView modelView = new ModelAndView("materia/listaDeAlumnosDeMateria");
+        modelView.addObject("materia", materiaService.buscarMateria(codigoMateria));
+        return modelView;
     }
 
     @GetMapping("/borrarMateria/{codigo}")
     public ModelAndView borrarMateria(@PathVariable(name = "codigo") String codigo) {
         materiaService.borrarMateria(codigo);
+        return new ModelAndView("redirect:/listadoMateria");
+    }
+    
+    @GetMapping("/borrarDefinitivoMateria/{codigo}")
+    public ModelAndView borrarDefinitivoMateria(@PathVariable(name = "codigo") String codigo) {
+        materiaService.borrarDefinitivoMateria(codigo);
         return new ModelAndView("redirect:/listadoMateria");
     }
 
