@@ -5,17 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.DTO.CarreraDTO;
-import ar.edu.unju.fi.model.Carrera;
 
 @Service
 public interface CarreraService {
 
 		public void guardarCarrera(CarreraDTO carreraDTO);
-		public List<Carrera> MostrarCarrera();
-		public List<Carrera> MostrarCarreraInactivas();
+		public List<CarreraDTO> MostrarCarrera();
+		public List<CarreraDTO> MostrarCarreraInactivas();
 		public void borrarCarrera(String codigo);
 		public void darDeAltaCarrera(String codigo);
 		public void modificarCarrera(CarreraDTO carreraDTO);
-		public Carrera buscaCarrera(String codigo);
+		public CarreraDTO buscaCarrera(String codigo);
+		public void darDeBajaAlumnoDeCarrera(String codigoCarrera, String LU);
+		public void darDeBajaMateriaDeCarrera(String codigoCarrera, String codigoMateria);
 		
 }

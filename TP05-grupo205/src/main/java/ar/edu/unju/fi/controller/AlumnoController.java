@@ -197,7 +197,7 @@ public class AlumnoController {
     
     @GetMapping("/darDeAltaCarrera/{LU}/{codigoCarrera}")
     public ModelAndView darDeAltaCarrera(@PathVariable("LU") String LU, @PathVariable("codigoCarrera") String codigoCarrera) {
-    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMAteriasCarrerasDeAlumno");
+    	ModelAndView modelView = new ModelAndView("/Alumno/listaDeMateriasCarrerasDeAlumno");
         try {
             alumnoService.darDeAltaCarrera(LU, codigoCarrera);
             modelView.addObject("alumno",alumnoService.buscarAlumno(LU));

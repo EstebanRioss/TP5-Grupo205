@@ -25,6 +25,7 @@
   <h1>Listado de las Materias alumno</h1>
   
   <br>
+  <a data-th-href="@{/listadoAlumno}" class="btn btn-primary">Ver los alumnos</a>
   <br>
  <div class="table-responsive">
     <table class="table">
@@ -69,7 +70,7 @@
           <th>Edicion</th>
         </tr>
       </thead>
-      <tbody data-th-each="carrera : ${alumno.carreras}">
+      <tbody data-th-each="carrera : ${alumno.carrera}">
         <tr>
           <td data-th-text="${carrera.nombre}"></td>
           <td data-th-text="${carrera.codigo}"></td>

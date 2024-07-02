@@ -19,6 +19,7 @@ public interface MateriaMapDTO {
 	@Mapping(source = "cantidadHoras", target = "cantidadHoras")
 	
 	MateriaDTO toDto(Materia materia);
+	@Mapping(target = "codigoAlumno", ignore = true)
 	@InheritInverseConfiguration
 	Materia toEntity(MateriaDTO materiaDTO);
 	

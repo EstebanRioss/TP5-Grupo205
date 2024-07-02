@@ -142,7 +142,8 @@ public class AlumnoServiceimp implements AlumnoService{
         logger.info("Dando de baja carrera {} para el alumno con código: {}", codigoCarrera, LU);
         Alumno alumno = alumnoRepository.findById(LU).orElse(null);
         if (alumno != null) {
-            alumno.getCarreras().removeIf(carrera -> carrera.getCodigo().equals(codigoCarrera));
+        	alumno.getCarrera().getAlumnos().remove(alumno);
+            alumno.setCarrera(null);
             alumnoRepository.save(alumno);
             logger.info("Carrera {} dada de baja correctamente para el alumno con código: {}", codigoCarrera, LU);
         } else {
@@ -163,42 +164,50 @@ public class AlumnoServiceimp implements AlumnoService{
 	        }
 	}
 
-	@Override
-	public void darDeAltaMateria(String LU, String codigoMateria) {
-		// TODO Auto-generated method stub
-		logger.info("Dando de alta la materia con código {} para el alumno con LU {}", codigoMateria, LU);
-        Alumno alumno = alumnoRepository.findById(LU).orElse(null);
-        Materia materia = materiaRepository.findById(codigoMateria).orElse(null);
-        if (alumno != null && materia != null) {
-            if (!alumno.getMaterias().contains(materia)) {
-                alumno.getMaterias().add(materia);
-                alumnoRepository.save(alumno);
-                logger.info("Materia con código {} añadida exitosamente al alumno con LU {}", codigoMateria, LU);
-            } else {
-                logger.warn("La materia con código {} ya está presente para el alumno con LU {}", codigoMateria, LU);
-            }
-        } else {
-            logger.error("Error al añadir la materia: Alumno o Materia no encontrados.");
-        }
-	}
+	 @Override
+	 public void darDeAltaMateria(String LU, String codigoMateria) {
+	     logger.info("Dando de alta la materia con código {} para el alumno con LU {}", codigoMateria, LU);
+	     
+	     Alumno alumno = alumnoRepository.findById(LU).orElse(null);
+	     Materia materia = materiaRepository.findById(codigoMateria).orElse(null);
+	     
+	     if (alumno != null && materia != null) {
+	         if (!alumno.getMaterias().contains(materia)) {
+	             alumno.getMaterias().add(materia);
+	             alumnoRepository.save(alumno);
+	             logger.info("Materia con código {} añadida exitosamente al alumno con LU {}", codigoMateria, LU);
+	         } else {
+	             logger.warn("La materia con código {} ya está presente para el alumno con LU {}", codigoMateria, LU);
+	         }
+	     } else {
+	         logger.error("Error al añadir la materia: Alumno o Materia no encontrados.");
+	     }
+	 }
 
-	@Override
-    public void darDeAltaCarrera(String LU, String codigoCarrera) {
-        logger.info("Dando de alta la carrera con código {} para el alumno con LU {}", codigoCarrera, LU);
-        Alumno alumno = alumnoRepository.findById(LU).orElse(null);
-        Carrera carrera = carreraRepository.findById(codigoCarrera).orElse(null);
-        if (alumno != null && carrera != null) {
-            if (!alumno.getCarreras().contains(carrera)) {
-                alumno.getCarreras().add(carrera);
-                alumnoRepository.save(alumno);
-                logger.info("Carrera con código {} añadida exitosamente al alumno con LU {}", codigoCarrera, LU);
-            } else {
-                logger.warn("La carrera con código {} ya está presente para el alumno con LU {}", codigoCarrera, LU);
-            }
-        } else {
-            logger.error("Error al añadir la carrera: Alumno o Carrera no encontrados.");
-        }
-    }
+	 @Override
+	 public void darDeAltaCarrera(String LU, String codigoCarrera) {
+	     logger.info("Dando de alta la carrera con código {} para el alumno con LU {}", codigoCarrera, LU);
+	     
+	     Alumno alumno = alumnoRepository.findById(LU).orElse(null);
+	     Carrera carrera = carreraRepository.findById(codigoCarrera).orElse(null);
+	     
+	     if (alumno != null && carrera != null) {
+	         if (alumno.getCarrera() == null) {
+	             alumno.setCarrera(carrera);
+	             carrera.getAlumnos().add(alumno);
+	             
+	             // Guardar la carrera y el alumno
+	             carreraRepository.save(carrera);
+	             alumnoRepository.save(alumno);
+	             
+	             logger.info("Carrera con código {} añadida exitosamente al alumno con LU {}", codigoCarrera, LU);
+	         } else {
+	             logger.warn("El alumno con LU {} ya tiene asignada una carrera.", LU);
+	         }
+	     } else {
+	         logger.error("Error al añadir la carrera: Alumno o Carrera no encontrados.");
+	     }
+	 }
 
     
     

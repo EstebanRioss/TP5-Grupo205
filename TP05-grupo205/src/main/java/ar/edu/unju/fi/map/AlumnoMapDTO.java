@@ -16,17 +16,19 @@ public interface AlumnoMapDTO {
     @Mapping(target = "dni", source = "dni")
     @Mapping(target = "nombre", source = "nombre")
     @Mapping(target = "apellido", source = "apellido")
-    //@Mapping(target = "estado", source = "estado")
-    //@Mapping(target = "telefono", source = "telefono")
-    //@Mapping(target = "domicilio", source = "domicilio")
-    //@Mapping(target = "email", source = "email")
-    //@Mapping(target = "fechaNacimiento", source = "fechaNacimiento")
+    @Mapping(target = "estado", source = "estado")
+    @Mapping(target = "telefono", source = "telefono")
+    @Mapping(target = "domicilio", source = "domicilio")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "fechaNacimiento", source = "fechaNacimiento")
     AlumnoDTO convertirAlumnoAAlumnoDTO(Alumno a);
     
+    @Mapping(target = "carrera", ignore = true)
 	@InheritInverseConfiguration(name = "convertirAlumnoAAlumnoDTO")
     Alumno convertirAlumnoDTOAAlumno(AlumnoDTO aDTO);
 
     List<AlumnoDTO> convertirListaAlumnoAListaAlumnoDTO(List<Alumno> listaA);
     List<Alumno> convertirListaAlumnoDTOAListaAlumno(List<AlumnoDTO> listaADTO);
 }
+
 
