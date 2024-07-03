@@ -2,11 +2,13 @@ package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import jakarta.validation.Valid;
 
 import ar.edu.unju.fi.DTO.DocenteDTO;
 import ar.edu.unju.fi.service.DocenteService;
@@ -46,14 +48,17 @@ public class DocenteController {
     }
 	
 	@PostMapping("/guardarDocente")
-	public ModelAndView saveDocente(@ModelAttribute ("nuevoDocente") DocenteDTO DocenteDTO) {
-		
-		docenteService.save(DocenteDTO);
-		ModelAndView modelView = new ModelAndView("docente/listadoDeDocentes");
-		modelView.addObject("listadoDocentes",docenteService.MostrarDocente());
-		
-		return modelView;
-	}
+    public ModelAndView saveDocente(@Valid @ModelAttribute("nuevoDocente") DocenteDTO docenteDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            ModelAndView modelView = new ModelAndView("docente/formDocente");
+            modelView.addObject("nuevoDocente", docenteDTO);
+            modelView.addObject("band", false);
+            return modelView;
+        }
+
+        docenteService.save(docenteDTO);
+        return new ModelAndView("redirect:/listadoDocente");
+    }
 	
 	@GetMapping("/borrarDocente/{legajo}")
 	public ModelAndView borrarDocente(@PathVariable(name="legajo") String legajo){
@@ -81,15 +86,18 @@ public class DocenteController {
 		return modelView;
 	}
 	
-	@PostMapping("/guardarModDocente")
-	public ModelAndView guardarModificacionAlumno(@ModelAttribute ("nuevoDocente")DocenteDTO Docente) {
-		
-		docenteService.edit(Docente);
-		ModelAndView modelView = new ModelAndView("docente/listadoDeDocentes");
-		modelView.addObject("listadoDocentes",docenteService.MostrarDocente());
-		
-		return modelView;
-	}
+	 @PostMapping("/guardarModDocente")
+	    public ModelAndView guardarModificacionAlumno(@Valid @ModelAttribute("nuevoDocente") DocenteDTO docenteDTO, BindingResult result) {
+	        if (result.hasErrors()) {
+	            ModelAndView modelView = new ModelAndView("docente/formDocente");
+	            modelView.addObject("nuevoDocente", docenteDTO);
+	            modelView.addObject("band", true);
+	            return modelView;
+	        }
+
+	        docenteService.edit(docenteDTO);
+	        return new ModelAndView("redirect:/listadoDocente");
+	    }
 	
 	@GetMapping("/darDeAlta/{legajo}")
 	public ModelAndView darDeAlta(@PathVariable(name="legajo") String legajo){
