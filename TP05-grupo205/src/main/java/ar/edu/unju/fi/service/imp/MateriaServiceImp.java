@@ -55,6 +55,7 @@ public class MateriaServiceImp implements MateriaService {
         for (MateriaDTO materia : todasLasMaterias) {
             if (materia.getCodigo().equals(codigo)) {
                 materia.setEstado(false);
+                materia.setDocente(null);
                 materiaRepository.save(materiaMapDTO.toEntity(materia));
                 break; // Termina el bucle al encontrar la materia
             }
@@ -73,6 +74,7 @@ public class MateriaServiceImp implements MateriaService {
             materiaExistente.setCantidadHoras(materia.getCantidadHoras());
             materiaExistente.setNombre(materia.getNombre());
             materiaExistente.setCarrera(materia.getCarrera());
+            materiaExistente.setDocente(materia.getDocente());
             materiaRepository.save(materiaMapDTO.toEntity(materiaExistente));
         }
     }

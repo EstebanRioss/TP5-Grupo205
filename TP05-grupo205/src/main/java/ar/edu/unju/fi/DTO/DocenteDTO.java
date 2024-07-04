@@ -16,7 +16,6 @@ import lombok.Setter;
 public class DocenteDTO {
 
     @NotBlank(message = "El legajo no puede estar vacío")
-    @Pattern(regexp = "\\d+", message = "El legajo debe contener solo números")
     private String legajoDTO;
 
     @NotBlank(message = "El nombre no puede estar vacío")

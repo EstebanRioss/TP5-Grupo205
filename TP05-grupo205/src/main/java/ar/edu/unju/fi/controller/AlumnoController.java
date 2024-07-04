@@ -225,14 +225,26 @@ public class AlumnoController {
     public ModelAndView getListadoMateriasCarrerasDisponibles(@PathVariable("LU") String LU){
         ModelAndView modelView = new ModelAndView("alumno/listaDeMateriasCarreras");
         try {
-            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
-            modelView.addObject("listadoMaterias",materiaService.mostrarMaterias());
-            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        	if(alumnoService.buscarAlumno(LU).getCarrera() != null){
+	        	modelView.addObject("listadoMaterias",alumnoService.buscarAlumno(LU).getCarrera().getMaterias());
+	            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+	            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        	}
+        	else {
+        		modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+                modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        	}
         } catch (Exception e) {
-            modelView.addObject("error", "Error al obtener el listado de alumnos inactivos: " + e.getMessage());
-            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
-            modelView.addObject("listadoMaterias",materiaService.mostrarMaterias());
-            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+            modelView.addObject("error", "Error al obtener el listado las materias y carreras disponibles: " + e.getMessage());
+            if(alumnoService.buscarAlumno(LU).getCarrera() != null){
+	        	modelView.addObject("listadoMaterias",alumnoService.buscarAlumno(LU).getCarrera().getMaterias());
+	            modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+	            modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        	}
+        	else {
+        		modelView.addObject("listadoCarreras",cs.MostrarCarrera());
+                modelView.addObject("alumno",alumnoService.buscarAlumno(LU));
+        	}
         }
         return modelView;
     }

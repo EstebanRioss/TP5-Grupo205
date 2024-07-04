@@ -59,9 +59,6 @@ public class DocenteServiceImp implements DocenteService {
 	@Override
 	public void edit(DocenteDTO docenteDTO) {
         logger.info("Editando Docente con legajo: {}", docenteDTO.getLegajoDTO());
-        if (docenteDTO == null) {
-            logger.error("DocenteDTO es nulo");
-           }
         DocenteDTO docenteExistente = this.buscaDocente(docenteDTO.getLegajoDTO());    
         if (docenteExistente != null) {
             docenteExistente.setApellidoDTO(docenteDTO.getApellidoDTO());
