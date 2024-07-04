@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.DTO.MateriaDTO;
 import ar.edu.unju.fi.service.CarreraService;
+import ar.edu.unju.fi.service.DocenteService;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
@@ -24,12 +25,16 @@ public class MateriaController {
 
     @Autowired
     private CarreraService cs;
+    
+    @Autowired
+    private DocenteService ds;
 
     @GetMapping("/formularioMateria")
     public ModelAndView getFormMateria() {
         ModelAndView modelView = new ModelAndView("materia/formMateria");
         modelView.addObject("nuevaMateria", nuevaMateria);
         modelView.addObject("listaCarreras", cs.MostrarCarrera());
+        modelView.addObject("listaDocente" , ds.MostrarDocente());
         modelView.addObject("band", false);
         return modelView;
     }
@@ -61,6 +66,7 @@ public class MateriaController {
             ModelAndView modelView = new ModelAndView("materia/formMateria");
             modelView.addObject("nuevaMateria", materia);
             modelView.addObject("listaCarreras", cs.MostrarCarrera());
+            modelView.addObject("listaDocente" , ds.MostrarDocente());
             modelView.addObject("band", false);
             return modelView;
         }
@@ -101,6 +107,7 @@ public class MateriaController {
         MateriaDTO materia = materiaService.buscarMateria(codigo);
         modelView.addObject("nuevaMateria", materia);
         modelView.addObject("listaCarreras", cs.MostrarCarrera());
+        modelView.addObject("listaDocente" , ds.MostrarDocente());
         modelView.addObject("band", true);
         return modelView;
     }
@@ -111,6 +118,7 @@ public class MateriaController {
             ModelAndView modelView = new ModelAndView("materia/formMateria");
             modelView.addObject("nuevaMateria", materia);
             modelView.addObject("listaCarreras", cs.MostrarCarrera());
+            modelView.addObject("listaDocente" , ds.MostrarDocente());
             modelView.addObject("band", true);
             return modelView;
         }

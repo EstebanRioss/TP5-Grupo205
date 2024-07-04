@@ -71,6 +71,14 @@
         <option data-th-each="carrera : ${listaCarreras}" data-th-value="${carrera.codigo}" data-th-text="${carrera.nombre}" data-th-selected="${carrera.codigo == nuevaMateria.carrera.codigo}"></option>
     	</select>      
 	</div>
+	 
+	<div class="col-md-4">
+    	<label for="docente" class="form-label">Docente</label>
+    	<select class="form-select" id="docente" name="docente" data-th-field="*{docente.legajo}">
+        	<option value="">Seleccione un docente</option>
+        	<option data-th-each="docente : ${listaDocente}" data-th-value="${docente.legajoDTO}" data-th-text="${docente.nombreDTO}" data-th-selected="${docente.legajoDTO == nuevaMateria.docente.legajo}"></option>
+    	</select>      
+	</div>
 	  
 	  <br>
 	  <button type="submit" class="btn btn-primary">Guardar Carrera</button>

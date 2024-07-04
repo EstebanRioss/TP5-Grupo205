@@ -37,6 +37,7 @@
           <th>Cantidad de horas</th>
           <th>Modalidad</th>
           <th>Carrera</th>
+          <th>Profesor</th>
           <th>Edicion</th>
         </tr>
       </thead>
@@ -50,6 +51,7 @@
           <td data-th-text="${materia.cantidadHoras}"></td>
           <td data-th-text="${materia.modalidad}"></td>
           <td data-th-text="${materia.carrera.nombre}"></td>
+          <td data-th-text="${materia.docente.nombre}"></td>
           
           <td>
           	<a data-th-href="@{'/borrarMateria/'+${materia.codigo}}" class="btn btn-danger">Borrar</a>
